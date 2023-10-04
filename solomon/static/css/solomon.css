@@ -1,0 +1,37 @@
+body {
+  font-family: Roboto;
+}
+
+.header_logo {
+  max-width: 81px;
+  display: block;
+}
+.header_companyname {
+  font-size: 2.2rem;
+}
+.carousel-caption-home {
+  z-index: 9;
+  height: 410px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.carousel-home, .carousel-home .carousel-inner {
+  max-height: 500px;
+}
+.carousel-home .carousel-inner:before {
+  content: '';
+  position:absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 2;
+}
+.footer_logo {
+  max-width: 50px;
+}
+
+img.left {float: left}
+img.right {float: right; margin-left:2rem;}

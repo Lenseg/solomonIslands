@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+<!-- load wagtailcore_tags by adding this: -->
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+
+<!-- replace everything below with: -->
+{% block content %}
+
+  {% image self.banner_image fill-900x400 as img %}
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-12">
+          <h2>{{self.subtitle}}</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-8">
+          <div class="clearfix mb-5">{{self.body|richtext}}</div>
+          <div class="accordion" id="accordion_about">
+            {% for block in page.questions_and_answers %}
+                <section>{% include_block block %}</section>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="col-4">
+          {% image self.side_image fill-400x400 as img %}
+          <img src="{{img.url}}" class="d-block w-100" alt="...">
+        </div>
+      </div>
+    </div>
+{% endblock %}

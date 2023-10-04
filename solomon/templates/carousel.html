@@ -1,0 +1,24 @@
+<!-- load wagtailcore_tags by adding this: -->
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+<!-- replace everything below with: -->
+{% block content %}
+  <div id="carousel" data-bs-ride="carousel" class="carousel-home carousel slide">
+    <div class="carousel-caption carousel-caption-home d-none d-md-flex">
+      <h3 class="fw-bold text-uppercase">{{self.slide_text}}</h3>
+      <a type="button" href="{{self.button_link}}"  class="btn btn-lg btn-primary">{{self.button_text}}</a>
+    </div>
+    <div class="carousel-inner">
+      {% for slide in self.slides %}
+        {% image slide.slide_image fill-900x400 as img %}
+        {% if forloop.first %}
+        <div class="carousel-item active">
+        {% endif %}
+        {% if not forloop.first %}
+        <div class="carousel-item">
+        {% endif %}
+          <img src="{{img.url}}" class="d-block w-100" alt="...">
+        </div>
+      {% endfor %}
+  </div>
+{% endblock %}
