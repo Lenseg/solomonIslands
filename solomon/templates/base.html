@@ -43,18 +43,16 @@
         {% wagtailuserbar %}
 
         {% image settings.site_settings.GlobalSiteSettings.logo fill-300x300 as img %}
-        <header>
-          <div class="container">
+        <header class="mt-0 header-main">
+          <div class="container d-none d-lg-block">
               <div class="header text-primary row pt-3 pb-3">
-                <div class="col col-1">
-                  <a class="header_logo" href="/">
+                <div class="col d-flex col-md-8 col-lg-9">
+                  <a class="header_logo align-self-center me-4" href="/">
                     <img class="img-fluid" src="{{img.url}}" alt="">
                   </a>
+                  <h1 class="align-self-center mb-0 fw-bold header_companyname">Solomon Islands National Disaster Management Office</h1>
                 </div>
-                <div class="col-8 d-flex">
-                  <h1 class="align-self-center fw-bold header_companyname">Solomon Islands National Disaster Management Office</h1>
-                </div>
-                <div class="col-3 col-3 d-flex flex-column align-items-end justify-content-center">
+                <div class="d-none d-md-flex col col-3 col-md-4 col-lg-3 flex-column align-items-end justify-content-center">
                   <div class="mb-1 fw-bold">
                     <i class="bi bi-telephone-fill me-2"></i>
                     {{ settings.site_settings.GlobalSiteSettings.phone}}
@@ -71,7 +69,16 @@
               </div>
           </div>
           <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <div class="container">
+            <div class="container-lg">
+              <div class="menu-header d-lg-none d-flex">
+                <a class="header_logo align-self-center me-2 me-sm-4" href="/">
+                  <img class="img-fluid" src="{{img.url}}" alt="">
+                </a>
+                <h1 class="align-self-center mb-0 fw-bold header_companyname">Solomon Islands National Disaster Management Office</h1>
+              </div>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   {% main_menu max_levels=2 template="main_menu.html" %}
                 <form class="d-flex" role="search">
@@ -84,9 +91,9 @@
         {% block content %}{% endblock %}
         <footer class="bg-primary footer text-white mt-5">
           <div class="container">
-              <div class="row row-cols-5 py-5 border-top">
-                <div class="col col-3 d-flex flex-column align-items-start justify-content-start">
-                  <a class="footer_logo d-inline-block mb-5" href="/">
+              <div class="row py-5">
+                <div class="col col-10 offset-1 offset-sm-0 col-sm-6 col-md-4 col-lg-3 d-flex flex-column align-items-start justify-content-start">
+                  <a class="footer_logo d-inline-block mb-2" href="/">
                     <img class="img-fluid" src="{{img.url}}" alt="">
                   </a>
                   <div class="mb-1 fw-bold">
@@ -106,14 +113,18 @@
                     <a target="_blank" href="{{ settings.site_settings.GlobalSiteSettings.twitter}}"><i class="bi bi-twitter"></i></a>
                   </div>
                 </div>
-                <div class="col col-3">
+                <div class="col col-10 offset-1 offset-sm-0 col-sm-6 col-md-4 col-lg-3">
                   <h6>Links</h6>
+                  <ul class="list-unstyled ps-3">
                   {% for link in settings.site_settings.GlobalSiteSettings.links %}
-                    <a class="link-light mb-2 d-inline-block" href="{{link.value.link_url}}">{{link.value.link_text}}</a>
+                    <li>
+                      <a class="link-light mb-2 d-inline-block" href="{{link.value.link_url}}">{{link.value.link_text}}</a>
+                    </li>
                   {% endfor %}
+                  </ul>
                 </div>
-                <div class="col col-3"></div>
-                <div class="col col-3"></div>
+                <div class="col col-sm-4 col-md-4 col-lg-3"></div>
+                <div class="col d-none col-3"></div>
               </div>
           </div>
         </footer>

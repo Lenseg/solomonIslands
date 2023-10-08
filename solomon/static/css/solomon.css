@@ -1,7 +1,13 @@
 body {
   font-family: Roboto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-
+wagtail-userbar {
+  position: absolute;
+}
 .header_logo {
   max-width: 81px;
   display: block;
@@ -11,7 +17,7 @@ body {
 }
 .carousel-caption-home {
   z-index: 9;
-  height: 410px;
+  height: 100%;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
@@ -35,3 +41,34 @@ body {
 
 img.left {float: left}
 img.right {float: right; margin-left:2rem;}
+
+.menu-header{
+  max-width: calc(100% - 60px);
+}
+
+.card-img-small {
+  height: 8rem;
+  object-fit: cover;
+}
+
+@media (max-width: 991px) {
+
+  .header_logo {
+    max-width: 51px;
+    display: block;
+  }
+  .header_companyname {
+    font-size: 1.6rem;
+    color: #fff
+  }
+}
+@media (max-width: 575px) {
+
+  .header_logo {
+    max-width: 41px;
+    display: block;
+  }
+  .header_companyname {
+    font-size: 1rem;
+  }
+}

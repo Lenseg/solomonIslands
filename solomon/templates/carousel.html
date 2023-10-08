@@ -5,8 +5,12 @@
 {% block content %}
   <div id="carousel" data-bs-ride="carousel" class="carousel-home carousel slide">
     <div class="carousel-caption carousel-caption-home d-none d-md-flex">
-      <h3 class="fw-bold text-uppercase">{{self.slide_text}}</h3>
+      <h3 class="fw-bold text-uppercase mt-4">{{self.slide_text}}</h3>
       <a type="button" href="{{self.button_link}}"  class="btn btn-lg btn-primary">{{self.button_text}}</a>
+    </div>
+    <div class="carousel-caption carousel-caption-home d-none d-sm-flex d-md-none">
+      <h5 class="fw-bold text-uppercase mt-4">{{self.slide_text}}</h5>
+      <a type="button" href="{{self.button_link}}"  class="btn btn-primary">{{self.button_text}}</a>
     </div>
     <div class="carousel-inner">
       {% for slide in self.slides %}

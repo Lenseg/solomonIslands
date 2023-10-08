@@ -6,30 +6,38 @@
 
 <!-- replace everything below with: -->
 {% block content %}
-  <div class="container-fluid p-0 mb-5">
+  <div class="container-fluid d-none d-sm-block p-0 mb-5">
       <section>{% include_block page.carousel %}</section>
   </div>
 
   <div class="container">
     <div class="row">
-      <div class="col-8">
+      <div class="col-12 col-lg-8">
         {{page.body|richtext}}
       </div>
-      <div class="col-4">
-        <h5 class="mb-2">Upcoming events</h5>
-        <div class="card mb-4" style="width: 18rem;">
-          <img src="..." class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Event name</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <div class="col-12 col-lg-4">
+        <div class="row">
+          <div class="col-12">
+            <h3 class="mb-4">Featured Releases</h3>
           </div>
-        </div>
-        <div class="card mb-4" style="width: 18rem;">
-          <img src="..." class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Event name</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
+          {% for post in featured_pages %}
+
+            {% image post.release_image fill-600x600 as img %}
+            <div class="col-md-6 col-lg-12">
+              <div class="card mb-4">
+              <a href="{{post.url}}">
+                <img src="{{img.url}}" class="card-img-small card-img-top" alt="...">
+              </a>
+                <div class="card-body">
+
+                  <a class="text-dark" href="{{post.url}}">
+                  <h5 class="card-title">{{post.title}}</h5>
+                </a>
+                  <div class="card-text">{{post.description|richtext}}</div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
         </div>
       </div>
     </div>

@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-8">
+        <div class="col-12 col-md-8">
           <div class="clearfix mb-5">{{self.body|richtext}}</div>
           <div class="accordion" id="accordion_about">
             {% for block in page.questions_and_answers %}
@@ -23,7 +23,7 @@
             {% endfor %}
           </div>
         </div>
-        <div class="col-4">
+        <div class="d-none d-md-block col-4">
           {% image self.side_image fill-400x400 as img %}
           <img src="{{img.url}}" class="d-block w-100" alt="...">
         </div>

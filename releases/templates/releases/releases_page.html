@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+<!-- load wagtailcore_tags by adding this: -->
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+
+<!-- replace everything below with: -->
+{% block content %}
+<div class="container mt-5">
+  <div class="row">
+    {% for post in posts %}
+      {% image post.release_image fill-600x600 as img %}
+      <div class="col-md-4 col-sm-6 col-12">
+        <div class="card" >
+          <img src="{{img.url}}" class="card-img-top card-img-small" alt="...">
+          <div class="card-body">
+            <a href="{{post.url}}" class="fw-bold text-black"><h5>{{post.title}}</h5></a>
+            <div class="my-3">{{post.description|richtext}}</div>
+            <div class="d-flex align-items-center">
+              <a href="{{post.url}}" class="btn btn-primary">Read more</a>
+              <a class="d-inline-block ms-auto" href="https://www.facebook.com/sharer/sharer.php?u={{post.full_url}}" target="_blank">
+                <i class="bi bi-facebook me-3"></i>
+              </a>
+              <a href="https://twitter.com/intent/tweet?text={{post.full_url}}" target="_blank">
+                <i class="bi bi-twitter me-3"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

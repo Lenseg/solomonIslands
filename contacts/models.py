@@ -24,7 +24,6 @@ class ContactsPage(AbstractEmailForm, MenuPageMixin):
     subtitle = models.CharField(max_length=200, null=True, blank=True)
     body = RichTextField(blank=True, null=True)
     thank_you_text = RichTextField(blank=True, null=True)
-
     content_panels = AbstractEmailForm.content_panels + [
         FieldPanel('subtitle'),
         FieldPanel('body'),
