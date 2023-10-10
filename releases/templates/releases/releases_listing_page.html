@@ -20,12 +20,13 @@
       </div>
       <p>{{self.content|richtext}}</p>
     </div>
+    {% if self.release_image %}
+      {% image self.release_image fill-600x600 as img %}
       <div class="col-12 col-md-4">
-        {% image self.release_image max-600x600 as img %}
           <a href="{{img.url}}" target="_blank"><img src="{{img.url}}" class="card-img-top mb-4" alt="..."></a>
           <a href="{{img.url}}" download type="button" class="btn btn-primary">Download</a>
-
       </div>
+    {% endif %}
   </div>
 </div>
 {% endblock %}

@@ -9,10 +9,13 @@
 <div class="container mt-5">
   <div class="row">
     {% for post in posts %}
-      {% image post.release_image fill-600x600 as img %}
       <div class="mb-4 col-lg-4 col-md-6 col-12">
         <div class="card" >
-          <img src="{{img.url}}" class="card-img-top card-img-small" alt="...">
+
+            {% if post.release_image %}
+              {% image post.release_image fill-600x600 as img %}
+              <img src="{{img.url}}" class="card-img-top card-img-small" alt="...">
+            {% endif %}
           <div class="card-body">
             <a href="{{post.url}}" class="fw-bold text-black"><h5>{{post.title}}</h5></a>
             <div class="my-3">{{post.description|richtext}}</div>

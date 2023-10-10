@@ -1,12 +1,17 @@
 from django.db import models
 
 from wagtail.models import Page
+from wagtail.search import index
+
+from wagtail.contrib.routable_page.models import RoutablePageMixin, path
 from wagtail.admin.panels import FieldPanel
 from wagtail.fields import RichTextField
 from wagtail import blocks
 # Create your models here.
 
-class ReleasesPage(Page):
+class ReleasesPage(RoutablePageMixin, Page):
+
+
     subtitle = models.CharField(max_length=200, null=True, blank=True)
 
     content = RichTextField(null=True, blank=True)
@@ -18,10 +23,10 @@ class ReleasesPage(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context["posts"] = ReleasePage.objects.live().public()
+        context["posts"] = ReleasePage.objects.child_of(self).live()
         return context
 
-class ReleasePage(Page):
+class ReleasePage(Page, index.Indexed):
     template = "releases/releases_listing_page.html"
 
     subtitle = models.CharField(max_length=200, null=True, blank=True)
@@ -37,6 +42,12 @@ class ReleasePage(Page):
     )
 
     content =  RichTextField(null=True, blank=True)
+
+    search_fields = Page.search_fields + [ # Inherit search_fields from Page
+        index.SearchField('description'),
+        index.SearchField('content'),
+        index.SearchField('subtitle'),
+    ]
 
     content_panels = Page.content_panels + [
         FieldPanel("subtitle"),
