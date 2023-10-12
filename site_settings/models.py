@@ -1,5 +1,5 @@
 from django.db import models
-from wagtail.fields import StreamField
+from wagtail.fields import StreamField, RichTextField
 from wagtail.admin.panels import MultiFieldPanel, FieldPanel
 from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 from wagtail import blocks
@@ -48,3 +48,14 @@ class GlobalSiteSettings(BaseSiteSetting):
             FieldPanel("links"),
         ], heading = 'Footer Links')
     ]
+
+
+@register_setting
+class WarningSettings(BaseSiteSetting):
+        warning = RichTextField(blank=True, null=True, help_text="Warning text")
+        active = models.BooleanField(default=False, help_text="Warning active")
+
+        panels = [
+            FieldPanel("warning"),
+            FieldPanel("active"),
+        ]

@@ -72,3 +72,8 @@ img.right {float: right; margin-left:2rem;}
     font-size: 1rem;
   }
 }
+.warning_message p, .warning_message p a {
+  margin-bottom : 0 !important;
+  font-size: 0.8rem;
+  color: #fff;
+}

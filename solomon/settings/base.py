@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "site_settings",
     "search",
     "contacts",
+    "superpage",
     "releases",
     "wagtail_modeladmin",
     'wagtailmenus',

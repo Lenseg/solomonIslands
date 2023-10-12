@@ -11,7 +11,6 @@
     {% for post in posts %}
       <div class="mb-4 col-lg-4 col-md-6 col-12">
         <div class="card" >
-
             {% if post.release_image %}
               {% image post.release_image fill-600x600 as img %}
               <img src="{{img.url}}" class="card-img-top card-img-small" alt="...">

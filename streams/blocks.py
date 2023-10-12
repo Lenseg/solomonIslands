@@ -4,12 +4,33 @@ from django.db import models
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.models import Page
 
+class TextAndImageBLock(blocks.StructBlock):
+    image = ImageChooserBlock(
+        'wagtailimages.Image',
+        null=True,
+        blank=False,
+        on_delete=models.SET_NULL,
+        related_name="+"
+    )
+    text = blocks.RichTextBlock(blank=True, null=True, help_text="Section text")
+    button_text = blocks.CharBlock(blank=True, null=True, required=False, help_text="Button text")
+    button_link = blocks.URLBlock(blank=True, null=True, required=False, help_text="Button link")
+
+    class Meta:
+        template = 'textandimage.html'
+
 class Dropdown(blocks.StructBlock):
     header = blocks.CharBlock(reqired=True, help_text="Dropdown header")
     contnent = blocks.RichTextBlock(blank=True, null=True, help_text="Dropdown content")
 
     class Meta:
         template = 'dropdown.html'
+
+class Subheader(blocks.StructBlock):
+    text = blocks.RichTextBlock(blank=True, null=True, help_text="Subheader text")
+
+    class Meta:
+        template = 'subheader.html'
 
 class Carousel(blocks.StructBlock):
     slides = blocks.ListBlock(

@@ -38,7 +38,6 @@
         {# Override this in templates to add extra stylesheets #}
         {% endblock %}
     </head>
-
     <body class="{% block body_class %}{% endblock %}">
         {% wagtailuserbar %}
 
@@ -89,6 +88,15 @@
             </div>
           </nav>
         </header>
+        {% if settings.site_settings.WarningSettings.active %}
+          <div class="container-fluid mt-0 pt-1 pb-1 mb-auto warning bg-danger">
+            <div class="row">
+              <div class="col-12 warning_message text-white text-center">
+                {{settings.site_settings.WarningSettings.warning|richtext}}
+              </div>
+            </div>
+          </div>
+        {% endif %}
         {% block content %}{% endblock %}
         <footer class="bg-primary footer text-white mt-5">
           <div class="container">

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+<!-- load wagtailcore_tags by adding this: -->
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+
+<!-- replace everything below with: -->
+{% block content %}
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12">
+      <h2>{{self.title}}</h2>
+    </div>
+  </div>
+  <div class="row">
+    {% for block in self.content %}
+      {% include_block block %}
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

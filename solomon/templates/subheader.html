@@ -1,0 +1,12 @@
+<!-- load wagtailcore_tags by adding this: -->
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+
+<!-- replace everything below with: -->
+{% block content %}
+  <div class="row mb-2">
+    <div class="col-12 text-center">
+      <h3>{{value.text}}</h3>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,23 @@
+<!-- load wagtailcore_tags by adding this: -->
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+
+<!-- replace everything below with: -->
+{% block content %}
+  <div class="row mb-5">
+    <div class="col-12 col-sm-5 col-md-8">
+      {{value.text|richtext}}
+      {% if value.button_link %}
+        <div>
+          <a type="button" class="btn btn-primary" href="{{value.button_link}}">{{value.button_text}}</a>
+        </div>
+      {% endif %}
+    </div>
+    <div class="col-12 col-sm-5 col-md-4">
+      {% image value.image max-900x900 as img %}
+      <a href="{{img.url}}" target="_blank">
+        <img class="img-fluid" src="{{img.url}}" alt="">
+      </a>
+    </div>
+  </div>
+{% endblock %}
