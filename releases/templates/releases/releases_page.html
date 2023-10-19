@@ -8,15 +8,28 @@
 {% block content %}
 <div class="container mt-5">
   <div class="row">
+    <div class="col-12">
+      <h2>{{self.subtitle}}</h2>
+    </div>
+    <div class="text-success">
+      <hr class="border border-primary border-2">
+    </div>
+  </div>
+  <div class="row">
     {% for post in posts %}
       <div class="mb-4 col-lg-4 col-md-6 col-12">
         <div class="card" >
             {% if post.release_image %}
-              {% image post.release_image fill-600x600 as img %}
+              {% image post.release_image max-900x900 as img %}
               <img src="{{img.url}}" class="card-img-top card-img-small" alt="...">
             {% endif %}
           <div class="card-body">
             <a href="{{post.url}}" class="fw-bold text-black"><h5>{{post.title}}</h5></a>
+            {% if post.date %}
+              <span>
+                {{post.date}}
+              </span>
+            {% endif %}
             <div class="my-3">{{post.description|richtext}}</div>
             <div class="d-flex align-items-center">
               <a href="{{post.url}}" class="btn btn-primary">Read more</a>

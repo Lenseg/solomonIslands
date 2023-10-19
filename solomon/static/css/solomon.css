@@ -18,6 +18,7 @@ wagtail-userbar {
 .carousel-caption-home {
   z-index: 9;
   height: 100%;
+  bottom: 0;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
@@ -47,8 +48,9 @@ img.right {float: right; margin-left:2rem;}
 }
 
 .card-img-small {
-  height: 8rem;
+  max-height: 14rem;
   object-fit: cover;
+  object-position: top;
 }
 
 @media (max-width: 991px) {
@@ -63,7 +65,15 @@ img.right {float: right; margin-left:2rem;}
   }
 }
 @media (max-width: 575px) {
-
+  .carousel-caption-home {
+    left: 2%;
+    right: 2%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .carousel-caption-home h6{
+    font-size: 0.8rem;
+  }
   .header_logo {
     max-width: 41px;
     display: block;
@@ -76,4 +86,26 @@ img.right {float: right; margin-left:2rem;}
   margin-bottom : 0 !important;
   font-size: 0.8rem;
   color: #fff;
+}
+
+
+
+.marker {
+  background-image: url('/static/icons/geo.svg');
+  background-size: cover;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+:root, [data-bs-theme=light] {
+  --bs-primary-rgb: 0,51,99;
+  --bs-btn-bg: 0,51,99;
+  --bs-link-color: #093363;
+  --bs-link-color-rgb: 0,51,99;
+}
+.btn-primary {
+  --bs-btn-border-color: rgb(0,51,99);
+  --bs-btn-bg: rgb(0,51,99);
 }

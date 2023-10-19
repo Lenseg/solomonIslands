@@ -32,6 +32,7 @@ class ReleasePage(Page, index.Indexed):
     subtitle = models.CharField(max_length=200, null=True, blank=True)
     custom_subtitle = models.CharField(max_length=200, null=True, blank=True)
     description = RichTextField(null=True, blank=True)
+    date = models.DateField("Event date", null=True, blank=True)
     featured = models.BooleanField(blank=True, null=True)
     release_image = models.ForeignKey(
         'wagtailimages.Image',
@@ -55,5 +56,6 @@ class ReleasePage(Page, index.Indexed):
         FieldPanel("release_image"),
         FieldPanel("description"),
         FieldPanel("content"),
+        FieldPanel("date"),
         FieldPanel("featured")
     ]

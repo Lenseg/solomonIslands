@@ -6,10 +6,15 @@
 
 <!-- replace everything below with: -->
 {% block content %}
+
 <div class="container mt-5">
   <div class="row">
     <div class="col-12">
       <h2>{{self.subtitle}}</h2>
+    </div>
+
+    <div class="text-success">
+      <hr class="border border-primary border-2">
     </div>
   </div>
   <div class="row">
@@ -51,7 +56,54 @@
     </div>
   </div>
   <div class="row">
-    <h4>Regional offices</h4>
+    <div class="col-12">
+      <h4>Regional offices</h4>
+    </div>
+    <div id="map" class="col-md-6 col-12" style="height:400px;">
+
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="list-group">
+        {% for office in self.offices %}
+          <div class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">{{office.value.office_name}}</h5>
+              <small>{{office.value.office_province}}</small>
+            </div>
+            <p class="mb-1">{{office.value.office_location}}</p>
+            <p class="mb-1">{{office.value.office_phone}}</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
   </div>
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoibGVuc2VnIiwiYSI6ImNpbm8ydWdnbzEwM2h1a20zanU5dTRmd2IifQ.HJplRyZIckK5LQLTgj5WAA';
+      const map = new mapboxgl.Map({
+      container: 'map', // container ID
+      style: 'mapbox://styles/mapbox/streets-v12', // style URL
+      center: [158.797190, -8.901858], // starting position [lng, lat]
+      zoom: 5, // starting zoom
+    });
+    fetch('/api/v2/pages/7/')
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        for (const office of data.offices) {
+          const el = document.createElement('div');
+          el.className = 'marker';
+          const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
+            `<h6 class="mb-1">${office.value.office_name}</h6> <p class="mb-1">${office.value.office_location}</p> \n <p class="mb-1">${office.value.office_phone}</p>`
+          );
+          new mapboxgl.Marker(el,{
+            offset: [0, -15]
+          }).setLngLat({
+            lng: parseFloat(office.value.lng),
+            lat: parseFloat(office.value.lat)
+          }).setPopup(popup).addTo(map);
+        }
+      })
+
+  </script>
 </div>
 {% endblock %}

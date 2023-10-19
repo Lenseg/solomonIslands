@@ -20,9 +20,12 @@ class TextAndImageBLock(blocks.StructBlock):
         template = 'textandimage.html'
 
 class Dropdown(blocks.StructBlock):
-    header = blocks.CharBlock(reqired=True, help_text="Dropdown header")
-    contnent = blocks.RichTextBlock(blank=True, null=True, help_text="Dropdown content")
-
+    dropdown = blocks.ListBlock(
+            blocks.StructBlock([
+                ('label', blocks.CharBlock(reqired=True, help_text="Dropdown header")),
+                ('content', blocks.RichTextBlock(blank=True, null=True, help_text="Dropdown content"))
+            ])
+        )
     class Meta:
         template = 'dropdown.html'
 
@@ -41,9 +44,13 @@ class Carousel(blocks.StructBlock):
                 blank=False,
                 on_delete=models.SET_NULL,
                 related_name="+"
-            ))
+            )),
+            ('slide_text', blocks.CharBlock(max_length=100,required=False, blank=True, null=True)),
+            ('button_text', blocks.CharBlock(max_length=100,required=False, blank=True, null=True)),
+            ('button_link', blocks.URLBlock(max_length=200,required=False, null=True, blank=True))
         ])
     )
+    use_root_text = blocks.BooleanBlock(default=True)
     slide_text = blocks.CharBlock(max_length=100,required=False, blank=True, null=True)
     button_text = blocks.CharBlock(max_length=100,required=False, blank=True, null=True)
     button_link = blocks.URLBlock(max_length=200,required=False, null=True, blank=True)

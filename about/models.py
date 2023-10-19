@@ -13,7 +13,7 @@ class AboutPage(Page):
         subtitle = models.CharField(max_length=200, null=True, blank=True)
 
         questions_and_answers = StreamField([
-            ('question_and_answer', blocks.Dropdown())
+            ('questions_and_answers', blocks.Dropdown())
         ], use_json_field=True, null=True, blank=True )
 
         body = RichTextField(blank=True, null=True)
