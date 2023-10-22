@@ -18,11 +18,8 @@ class HomePage(Page):
         context = super().get_context(request)
         releases = releases_models.ReleasesPage.objects.live()[0]
         events = releases_models.ReleasesPage.objects.live()[1]
-        print(releases, events)
         featured_post_pages = releases_models.ReleasePage.objects.live().descendant_of(releases).filter(featured=True)
         featured_event_pages = releases_models.ReleasePage.objects.live().descendant_of(events).filter(featured=True)
-
-        print(featured_post_pages, featured_event_pages)
         featured_pages = sorted(
             featured_post_pages,
             key=lambda page: page.first_published_at, reverse=True)
