@@ -6,11 +6,18 @@
 
 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
   {% for item in menu_items %}
-      <li class="nav-item">
-          <a class="nav-link {{ item.active_class }}" href="{{ item.href }}">{{ item.text }}</a>
-          {% if item.has_children_in_menu %}
-              {% sub_menu item %}
-          {% endif %}
-      </li>
+      {% if item.has_children_in_menu %}
+        <li class="nav-item btn-group dropdown me-3">
+          <a class="nav-link {{ item.active_class }}" href="{{ item.href }}" aria-haspopup="true">{{ item.text }}</a>
+          <button type="button" class="btn nav-link dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+           <span class="visually-hidden">Toggle Dropdown</span>
+         </button>
+          {% sub_menu item template="main_sub_menu.html" %}
+        </li>
+      {% else %}
+        <li class="nav-item me-3">
+            <a class="nav-link {{ item.active_class }}" href="{{ item.href }}">{{ item.text }}</a>
+        </li>
+    {% endif %}
   {% endfor %}
 </ul>
