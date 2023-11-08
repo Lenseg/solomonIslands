@@ -4,6 +4,7 @@ from django.db import models
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.models import Page
 
+
 class TextAndImageBLock(blocks.StructBlock):
     image = ImageChooserBlock(
         'wagtailimages.Image',
@@ -50,10 +51,27 @@ class Carousel(blocks.StructBlock):
             ('button_link', blocks.URLBlock(max_length=200,required=False, null=True, blank=True))
         ])
     )
-    use_root_text = blocks.BooleanBlock(default=True)
+    use_root_text = blocks.BooleanBlock(default=True, required=False)
     slide_text = blocks.CharBlock(max_length=100,required=False, blank=True, null=True)
     button_text = blocks.CharBlock(max_length=100,required=False, blank=True, null=True)
     button_link = blocks.URLBlock(max_length=200,required=False, null=True, blank=True)
 
     class Meta:
         template = 'carousel.html'
+
+
+class TwoColumnsBlock(blocks.StructBlock):
+    leftBlock = blocks.StreamBlock([
+        ('section_text', blocks.RichTextBlock(blank=True, null=True, help_text="Section text")),
+        ('section_carousel', Carousel(help_text="Section slider")),
+        ('section_dropdown', Dropdown(help_text="Section dropdown"))
+    ], use_json_field=True, null=True, blank=True )
+
+    rightBlock = blocks.StreamBlock([
+        ('section_text', blocks.RichTextBlock(blank=True, null=True, help_text="Section text")),
+        ('section_carousel', Carousel(help_text="Section slider")),
+        ('section_dropdown', Dropdown(help_text="Section dropdown"))
+    ], use_json_field=True, null=True, blank=True )
+
+    class Meta:
+        template = 'two_columns.html'

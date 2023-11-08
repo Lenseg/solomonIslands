@@ -15,10 +15,24 @@
       </div>
     </div>
   </div>
-  <div class="row">
-    {% for block in self.content %}
-      {% include_block block %}
-    {% endfor %}
-  </div>
 </div>
+    {% for block in self.content %}
+      {% if block.block_type == 'section_carousel' %}
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 p-0">
+              {% include_block block %}
+            </div>
+          </div>
+      </div>
+      {% else %}
+      <div class="container">
+        <div class="row">
+            <div class="col-12">
+              {% include_block block %}
+            </div>
+          </div>
+      </div>
+      {% endif %}
+    {% endfor %}
 {% endblock %}

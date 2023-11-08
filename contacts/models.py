@@ -39,6 +39,9 @@ class ContactsPage(AbstractEmailForm, MenuPageMixin):
                 ('office_province',
                     blocks.CharBlock(max_length=200,required=False, blank=True, null=True)
                 ),
+                ('office_comment',
+                    blocks.RichTextBlock(max_length=200,required=False, blank=True, null=True)
+                ),
                 ('lat',
                     blocks.CharBlock(max_length=200,required=True, blank=True, null=True)
                 ),

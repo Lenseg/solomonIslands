@@ -1,0 +1,19 @@
+<!-- load wagtailcore_tags by adding this: -->
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+
+<!-- replace everything below with: -->
+{% block content %}
+  <div class="row">
+    <div class="col-md-6 col-12">
+      {% for block in self.leftBlock %}
+        {% include_block block %}
+      {% endfor %}
+    </div>
+    <div class="col-md-6 col-12">
+      {% for block in self.rightBlock %}
+        {% include_block block %}
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

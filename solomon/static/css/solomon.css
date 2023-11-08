@@ -22,8 +22,9 @@ wagtail-userbar {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  box-sizing: border-box;
 }
-.carousel-home, .carousel-home .carousel-inner {
+.carousel-home, .carousel-home .carousel-inner, .carousel-home .carousel-item,  {
   max-height: 500px;
 }
 .carousel-home .carousel-inner:before {
@@ -108,4 +109,15 @@ img.right {float: right; margin-left:2rem;}
 .btn-primary {
   --bs-btn-border-color: rgb(0,51,99);
   --bs-btn-bg: rgb(0,51,99);
+}
+
+.release-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.release-card .card-body{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }

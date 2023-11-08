@@ -5,6 +5,6 @@
 
 <ul class="dropdown-menu bg-primary">
 {% for item in menu_items %}
-    <li><a class="dropdown-item bg-primary nav-link" href="{{ item.href }}">{{ item.text }}</a></li>
+    <li><a class="dropdown-item bg-primary nav-link {{ item.active_class }}" href="{{ item.href }}">{{ item.text }}</a></li>
 {% endfor %}
 </ul>

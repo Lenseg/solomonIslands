@@ -10,15 +10,15 @@
   <div class="row">
     <div class="col-12">
       <h2>{{self.subtitle}}</h2>
-    </div>
-    <div class="text-success">
-      <hr class="border border-primary border-2">
+      <div class="text-success">
+        <hr class="border border-primary border-2">
+      </div>
     </div>
   </div>
   <div class="row">
     {% for post in posts %}
       <div class="mb-4 col-lg-4 col-md-6 col-12">
-        <div class="card" >
+        <div class="card release-card" >
             {% if post.release_image %}
               {% image post.release_image max-900x900 as img %}
               <img src="{{img.url}}" class="card-img-top card-img-small" alt="...">
@@ -30,8 +30,8 @@
                 {{post.date}}
               </span>
             {% endif %}
-            <div class="my-3">{{post.description|richtext}}</div>
-            <div class="d-flex align-items-center">
+            <div class="mt-3 mb-auto">{{post.description|richtext}}</div>
+            <div class="d-flex mt-auto align-items-center">
               <a href="{{post.url}}" class="btn btn-primary">Read more</a>
               <a class="d-inline-block ms-auto" href="https://www.facebook.com/sharer/sharer.php?u={{post.full_url}}" target="_blank">
                 <i class="bi bi-facebook me-3"></i>
@@ -45,5 +45,37 @@
       </div>
     {% endfor %}
   </div>
+  {% if posts.paginator.num_pages > 1 %}
+    <div class="row justify-content-center">
+      <div class="col-lg-12 d-flex justify-content-center">
+        <div class="pagination">
+          {% if posts.has_previous %}
+            <li class="page-item">
+              <a href="?page={{ posts.previous_page_number }}" class="page-link">
+                <span>&laquo;</span>
+              </a>
+            </li>
+          {% endif %}
+
+          {% for page_num in posts.paginator.page_range %}
+            <li class="page-item {% if page_num == posts.number %} active{% endif %}">
+              <a href="?page={{ page_num }}" class="page-link">
+                {{ page_num }}
+              </a>
+            </li>
+          {% endfor %}
+
+          {% if posts.has_next %}
+            <li class="page-item">
+              <a href="?page={{ posts.next_page_number }}" class="page-link">
+                <span>&raquo;</span>
+              </a>
+            </li>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
 </div>
 {% endblock %}

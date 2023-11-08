@@ -7,6 +7,9 @@ from wagtail.contrib.routable_page.models import RoutablePageMixin, path
 from wagtail.admin.panels import FieldPanel
 from wagtail.fields import RichTextField
 from wagtail import blocks
+
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+
 # Create your models here.
 
 class ReleasesPage(RoutablePageMixin, Page):
@@ -20,10 +23,29 @@ class ReleasesPage(RoutablePageMixin, Page):
         FieldPanel("subtitle"),
         FieldPanel("content")
     ]
-
     def get_context(self, request, *args, **kwargs):
+        """Adding custom stuff to our context."""
         context = super().get_context(request, *args, **kwargs)
-        context["posts"] = ReleasePage.objects.child_of(self).live()
+        # Get all posts
+        all_posts = ReleasePage.objects.child_of(self).live().public().order_by('-first_published_at')
+        # Paginate all posts by 2 per page
+        paginator = Paginator(all_posts, 9)
+        # Try to get the ?page=x value
+        page = request.GET.get("page")
+        try:
+            # If the page exists and the ?page=x is an int
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            # If the ?page=x is not an int; show the first page
+            posts = paginator.page(1)
+        except EmptyPage:
+            # If the ?page=x is out of range (too high most likely)
+            # Then return the last page
+            posts = paginator.page(paginator.num_pages)
+
+        # "posts" will have child pages; you'll need to use .specific in the template
+        # in order to access child properties, such as youtube_video_id and subtitle
+        context["posts"] = posts
         return context
 
 class ReleasePage(Page, index.Indexed):

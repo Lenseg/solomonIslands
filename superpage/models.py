@@ -18,7 +18,8 @@ class SuperPage(Page):
         ('section_text_and_image', blocks.TextAndImageBLock(help_text="Text and image")),
         ('section_text', wblocks.RichTextBlock(blank=True, null=True, help_text="Section text")),
         ('section_carousel', blocks.Carousel(help_text="Section slider")),
-        ('section_dropdown', blocks.Dropdown(help_text="Section dropdown"))
+        ('section_dropdown', blocks.Dropdown(help_text="Section dropdown")),
+        ('section_two_columns', blocks.TwoColumnsBlock(help_text="Section two columns"))
     ], use_json_field=True, null=True, blank=True )
 
     content_panels = Page.content_panels + [

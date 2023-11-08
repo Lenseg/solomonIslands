@@ -104,7 +104,7 @@ DATABASES = {
     }
 }
 
-
+WAGTAIL_APPEND_SLASH = False
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 

@@ -3,34 +3,46 @@
 {% load wagtailimages_tags %}
 <!-- replace everything below with: -->
 {% block content %}
-<div class="row mb-5">
-  <div class="col-12">
-      <div id="carousel" data-bs-ride="carousel" class="carousel-home carousel slide">
-        <div class="carousel-caption carousel-caption-home d-none d-md-flex">
-          <h3 class="fw-bold text-uppercase">{{self.slide_text}}</h3>
-          <a type="button" href="{{self.button_link}}"  class="btn btn-lg btn-primary">{{self.button_text}}</a>
-        </div>
-        <div class="carousel-caption carousel-caption-home d-none d-sm-flex d-md-none">
-          <h5 class="fw-bold text-uppercase">{{self.slide_text}}</h5>
-          <a type="button" href="{{self.button_link}}"  class="btn btn-primary">{{self.button_text}}</a>
-        </div>
-        <div class="carousel-caption carousel-caption-home d-flex d-sm-none">
-          <h6 class="text-uppercase">{{self.slide_text}}</h6>
-          <a type="button" href="{{self.button_link}}"  class="btn btn-sm btn-primary">{{self.button_text}}</a>
-        </div>
-        <div class="carousel-inner">
-          {% for slide in self.slides %}
-            {% image slide.slide_image fill-900x400 as img %}
-            {% if forloop.first %}
-            <div class="carousel-item active">
-            {% endif %}
-            {% if not forloop.first %}
-            <div class="carousel-item">
-            {% endif %}
-              <img src="{{img.url}}" class="d-block w-100" alt="...">
-            </div>
-          {% endfor %}
+  <div id="carousel" data-bs-ride="carousel" class="carousel-home carousel slide">
+    {% if self.use_root_text %}
+      <div class="carousel-caption carousel-caption-home d-none d-md-flex">
+        <h3 class="fw-bold text-uppercase">{{self.slide_text}}</h3>
+        <a type="button" href="{{self.button_link}}"  class="btn btn-lg btn-primary">{{self.button_text}}</a>
       </div>
+      <div class="carousel-caption carousel-caption-home d-none d-sm-flex d-md-none">
+        <h5 class="fw-bold text-uppercase">{{self.slide_text}}</h5>
+        <a type="button" href="{{self.button_link}}"  class="btn btn-primary">{{self.button_text}}</a>
+      </div>
+      <div class="carousel-caption carousel-caption-home d-flex d-sm-none">
+        <h6 class="text-uppercase">{{self.slide_text}}</h6>
+        <a type="button" href="{{self.button_link}}"  class="btn btn-sm btn-primary">{{self.button_text}}</a>
+      </div>
+    {% endif %}
+    <div class="carousel-inner">
+      {% for slide in self.slides %}
+        {% image slide.slide_image fill-900x400 as img %}
+        {% if forloop.first %}
+        <div class="carousel-item active">
+        {% else %}
+        <div class="carousel-item">
+        {% endif %}
+          {% if not self.use_root_text %}
+            <div class="carousel-caption carousel-caption-home d-none d-md-flex">
+              <h3 class="fw-bold text-uppercase">{{slide.slide_text}}</h3>
+              <a type="button" href="{{self.button_link}}"  class="btn btn-lg btn-primary">{{slide.button_text}}</a>
+            </div>
+            <div class="carousel-caption carousel-caption-home d-none d-sm-flex d-md-none">
+              <h5 class="fw-bold text-uppercase">{{slide.slide_text}}</h5>
+              <a type="button" href="{{self.button_link}}"  class="btn btn-primary">{{slide.button_text}}</a>
+            </div>
+            <div class="carousel-caption carousel-caption-home d-flex d-sm-none">
+              <h6 class="text-uppercase">{{slide.slide_text}}</h6>
+              <a type="button" href="{{self.button_link}}"  class="btn btn-sm btn-primary">{{slide.button_text}}</a>
+            </div>
+          {% endif %}
+          <img src="{{img.url}}" class="d-block w-100" alt="...">
+        </div>
+      {% endfor %}
   </div>
 </div>
 {% endblock %}

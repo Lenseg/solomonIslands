@@ -8,7 +8,7 @@
   {% for item in menu_items %}
       {% if item.has_children_in_menu %}
         <li class="nav-item btn-group dropdown me-3">
-          <a class="nav-link {{ item.active_class }}" href="{{ item.href }}" aria-haspopup="true">{{ item.text }}</a>
+          <a class="nav-link {{ item.active_class }}  {{ item.active_ancestor_class }}" href="{{ item.href }}" aria-haspopup="true">{{ item.text }}</a>
           <button type="button" class="btn nav-link dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
            <span class="visually-hidden">Toggle Dropdown</span>
          </button>
