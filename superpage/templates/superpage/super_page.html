@@ -35,4 +35,9 @@
       </div>
       {% endif %}
     {% endfor %}
+    <script type="text/javascript">
+      if(window.location.pathname === '/library/') {
+        window.location.href = window.location.href.replace(window.location.pathname, '') + '/library/plans-legislation/'
+      }
+    </script>
 {% endblock %}
